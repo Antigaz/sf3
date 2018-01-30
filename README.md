@@ -1,9 +1,8 @@
 sfmetinet2018
 =============
 
-A Symfony project created on January 29, 2018, 8:39 am.
+## Install dependencies
+`$ composer install`
 
-Start
-=============
-php bin/console server:start
-
+## Run server
+`$ php bin/console server:start`
