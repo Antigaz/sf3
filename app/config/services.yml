@@ -3,6 +3,18 @@
 parameters:
     #parameter_name: value
 
+security:
+
+    firewalls:
+
+        main:
+
+
+    access_control:
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+
 services:
     # default configuration for services in *this* file
     _defaults:
