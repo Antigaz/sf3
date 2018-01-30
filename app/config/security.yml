@@ -7,9 +7,12 @@ security:
         in_memory:
             memory:
                 users:
-                    dev:
-                        password: $2y$12$72sBN5uRl/gnJhlVs7O6lu/y3gZ4dM52wYTuru3DNvzauX4NT32Pe
-                        roles: 'ROLE_USER'
+                  boris:
+                      password: $2y$12$72sBN5uRl/gnJhlVs7O6lu/y3gZ4dM52wYTuru3DNvzauX4NT32Pe
+                      roles: 'ROLE_USER'
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -19,18 +22,7 @@ security:
 
         main:
             anonymous: ~
-            # activate different ways to authenticate
+            http_basic: ~
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
     access_control:
-            # require ROLE_ADMIN for /admin*
-            - { path: ^/admin, roles: ROLE_ADMIN }
-
-    encoders:
-        Symfony\Component\Security\Core\User\User:
-            algorithm: bcrypt
-            cost: 12
+        - { path: ^/tickets/submit, roles: ROLE_USER }
