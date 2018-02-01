@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Proposition pour le Ticket : {{ ticket.eventName }}{% endblock %}
+
+{% block body %}
+    {{ form(ticketSubmissionForm) }}
+{% endblock %}

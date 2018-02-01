@@ -35,3 +35,7 @@ list_all_tickets_to_buy:
 ticket_info:
   path: /tickets/{name}
   defaults: { _controller: AppBundle:Sales:ticketInfo }
+
+submit_offer:
+  path:     /tickets/submit-offer/{eventName}
+  defaults: { _controller: AppBundle:Sales:submitOffer }
