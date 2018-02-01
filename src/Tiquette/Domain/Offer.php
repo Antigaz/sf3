@@ -1,61 +1,67 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: metinet
- * Date: 2/1/18
- * Time: 1:12 AM
+ * @author Boris Guéry <guery.b@gmail.com>
  */
 
 namespace Tiquette\Domain;
 
-
 class Offer
 {
-    private $proposition;
-    private $price;
-    /**
-     * Offer constructor.
-     * @param $proposition
-     * @param $price
-     */
-    public function __construct($proposition, $price)
+    private $id;
+    private $ticketId;
+    private $buyerId;
+    private $proposedPrice;
+    private $buyerMessage;
+
+    public static function for(TicketId $ticketId, MemberId $buyerId,
+        Price $proposedPrice, string $buyerMessage): self
     {
-        $this->proposition = $proposition;
-        $this->price = $price;
+        return new self(OfferId::generate(), $ticketId, $buyerId, $proposedPrice, $buyerMessage);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getProposition()
+    private function __construct(OfferId $id, TicketId $ticketId, MemberId $buyerId,
+        Price $proposedPrice, string $buyerMessage)
     {
-        return $this->proposition;
+        $this->id = $id;
+        $this->ticketId = $ticketId;
+        $this->buyerId = $buyerId;
+        $this->proposedPrice = $proposedPrice;
+        $this->buyerMessage = $buyerMessage;
     }
 
-    /**
-     * @param mixed $proposition
-     */
-    public function setProposition($proposition): void
+    public function getId(): OfferId
     {
-        $this->proposition = $proposition;
+        return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPrice()
+    public function getTicketId(): TicketId
     {
-        return $this->price;
+        return $this->ticketId;
     }
 
-    /**
-     * @param mixed $price
-     */
-    public function setPrice($price): void
+    public function getBuyerId(): MemberId
     {
-        $this->price = $price;
+        return $this->buyerId;
     }
 
+    public function getProposedPrice(): Price
+    {
+        return $this->proposedPrice;
+    }
 
+    public function getBuyerMessage(): string
+    {
+        return $this->buyerMessage;
+    }
 
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            OfferId::fromString($data['uuid']),
+            TicketId::fromString($data['ticket_uuid']),
+            MemberId::fromString($data['buyer_uuid']),
+            Price::inLowestSubunit($data['proposed_price'], $data['price_currency']),
+            $data['buyer_message']
+        );
+    }
 }

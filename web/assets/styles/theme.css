@@ -111,24 +111,9 @@ h6,
     margin-bottom: 0;
 }
 
-.liDescription {
-    padding: 20px;
-    font-size: 18px;
-    color: darkcyan;
-    font-weight: 700;
-}
-
-.buttonAchat {
-    padding: 10px;
-    background: darkcyan;
-    color: #ffffdd;
-    border: 2px solid darkcyan;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-.buttonAchat:hover {
-    color: darkcyan;
-    background: transparent;
-    border-color: darkcyan;
+.ticket-summary {
+    border: 1px solid #dadada;
+    background: #F5F5F5;
+    padding: .5em;
+    margin-bottom: 1em;
 }
